@@ -1,0 +1,20 @@
+/** 隐私政策确认
+ *  超过7天重新确认
+ */
+(function() {
+  const nowTime = new Date().getTime()
+  /** 7天时间戳 */
+  const seventDay = (60 * 1000 * 60 * 24 * 7)
+  /**
+   * 查看是否超时，超时删除
+   * @param {'cookieAgree' | 'cookieDisagree'} type
+   */
+  function checkPivacy(type) {
+    if (!localStorage.getItem(type)) return
+    if (nowTime - localStorage.getItem(type) > seventDay) {
+      localStorage.removeItem(type)
+    }
+  }
+  checkPivacy('cookieAgree')
+  checkPivacy('cookieDisagree')
+})()
